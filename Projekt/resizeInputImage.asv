@@ -1,0 +1,39 @@
+function resizedImage = resizeInputImage(inputImage,resolution)
+    %Skala om bilden
+    
+    %nargin - Number of arguments
+
+   %Kolla om användaren vill ha en spe
+   if nargin < 2
+       resolution = "";
+   end
+    
+outputstring = "";
+[height,width] = size(inputImage);
+maxDimension = 200;
+
+%%Skala ner eller upp
+if height > maxDimension || width > maxDimension
+    outputstring = "Din bild skalas ner ";
+    resizedImage = imresize(inputImage, [maxDimension,maxDimension]);
+else
+    outputstring = "Din bild skalas upp "
+    resizedImage = imresize(inputImage, [maxDimension,maxDimension]);
+end
+
+
+
+%Ändra resolution
+if resolution == "Landscape"
+    resizedImage = imresize(inputImage, [maxDimension/2,maxDimension]);
+    outputstring = outputstring + "och anpassa till formatet Landscape";
+else if resolution == "Portrait"
+    resizedImage = imresize(inputImage, [maxDimension,maxDimension/2]);
+    outputstring = outputstring + "och anpassa till formatet Portrait";
+else
+    resizedImage = imresize(inputImage, [maxDimension,maxDimension]);
+    outputstring = outputstring + "och behåller formatet";
+end
+
+disp(outputstring)
+end
